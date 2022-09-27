@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linked Lists</title>
+</head>
+<body>
+    <script>
+      class node { 
+        constructor(value=null) { 
+          this.value  = value;
+          this.next = null;
+        }
+      }
+      class linkedList { 
+        constructor(head,tail = null) { 
+          this.head = head;
+          this.tail = tail;
+        }
+        append(value) { 
+          if(this.tail) { 
+            let object = this.tail;
+            this.tail.next = {value, next: null};
+            this.tail = this.tail.next;
+          }
+        }
+
+        prepend(value) {
+          const object = {value,next: this.head};
+          this.head = object;
+        }
+
+        show() { 
+          console.log("#".repeat(20));
+          let node = this.head;
+          while(true) { 
+            console.log(node.value);
+            if(node.next) { 
+              node = node.next;
+            }
+            else { 
+              break;
+            }
+          }
+          console.log("#".repeat(20));
+        }
+        size() { 
+          let node = this.head;
+          let counter = 0;
+          while(node) {
+            counter++;
+            node = node.next;
+          }
+          return counter;
+        }
+        Gethead() { 
+          console.log(this.head);
+        }
+        Gettail() { 
+          console.log(this.tail);
+        }
+        at(index) { 
+          let node = this.head;
+          for(let i = 0 ; i<index ; i++) { 
+            node = node.next;
+          }
+          return node;
+        }
+        containes(value) { 
+          let node = this.head;
+          while(node) { 
+            if(value === node.value) { 
+              return true;
+            }
+            node = node.next;
+          }
+          return false;
+        }
+        find(value) { 
+          let node = this.head;
+          let counter = 0;
+          while(node) { 
+            if(node.value === value) { 
+              return counter;
+            }
+            counter++;  
+            node = node.next;
+          }
+          return null;
+        }
+        toString() { 
+          let node  = this.head;
+          let string  ='';
+          while(node) { 
+            string+= `(${node.value}) -> `;
+            node = node.next;
+          }
+          string += "null";
+          return string;
+        }
+        insertAt(value,index) { 
+          if(index < this.size()) { 
+            let currentNode = this.at(index);
+            console.log(currentNode);
+            let prevNode = this.at(index -1);
+            console.log(prevNode);
+            prevNode.next = {value,next:currentNode};
+          }
+        }
+        removeAt(index) { 
+          if(index + 1 < this.size()) { 
+            let prevNode = this.at(index - 1);
+            let laterNode = this.at(index + 1);
+            prevNode.next = laterNode;
+          } 
+          else if(index === (this.size() - 1)) { 
+            let prevNode = this.at(index - 1);
+            prevNode.next = null;
+          }
+        }
+      }
+      let hade = new node('hade');
+      let shade = new node('shade');
+      let shamah = new node('shamah');
+      let mohamade = new node('mohamade');
+      hade.next = shade; 
+      shade.next = shamah;
+      shamah.next = mohamade;
+      let linked = new linkedList(hade,mohamade);
+      linked.show();
+      linked.append('zoheare');
+      linked.show();
+      linked.prepend('soso');
+      linked.show();
+      console.log(linked.size());
+
+      linked.Gethead();
+      linked.Gettail();
+      console.log(linked.at(2));
+      console.log(linked.containes('soso'));
+      console.log(linked.find('mohamade'));
+      console.log(linked.toString());
+
+      linked.insertAt('hasan',3);
+      linked.show();
+      linked.show();
+    </script>
+</body>
+</html>
